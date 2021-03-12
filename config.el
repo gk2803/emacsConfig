@@ -22,6 +22,7 @@
 			    (?\[ . ?\])
 			    ))
 (electric-pair-mode t)
+(electric-indent-mode -1)
 
 (line-number-mode 1)
 (column-number-mode 1)
@@ -243,3 +244,15 @@
     (use-package yasnippet-snippets
       :ensure t)
     (yas-reload-all))
+
+(require 'google-translate)
+(require 'google-translate-smooth-ui)
+(global-set-key "\C-ct" 'google-translate-smooth-translate)
+(setq google-translate-translation-directions-alist
+      '(("en" . "el") ("el" . "en") ("de" . "en") ("fr" . "en")))
+(use-package google-translate
+  :ensure t
+  :custom
+  (google-translate-backend-method 'curl)
+  :config
+   (defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130)))

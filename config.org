@@ -40,7 +40,7 @@
 			      (?\[ . ?\])
 			      ))
   (electric-pair-mode t)
-
+  (electric-indent-mode -1) 
 #+END_SRC
 ** show lines and columns
 #+BEGIN_SRC emacs-lisp
@@ -75,7 +75,7 @@
     (setq linum-relative-current-symbol "")
     (add-hook 'prog-mode-hook 'linum-relative-mode))
 #+END_SRC
-n**  show parens
+
 #+BEGIN_SRC emacs-lisp
 (show-paren-mode 1)
 #+END_SRC
@@ -116,10 +116,7 @@ n**  show parens
   (setq scroll-conservatively 100)
 #+END_SRC
 * which-key
-kage which-key
-    :ensure t
-    :init
-    (which-key-mo
+
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
     :ensure t
@@ -376,4 +373,19 @@ kage which-key
 	(use-package yasnippet-snippets
 	  :ensure t)
 	(yas-reload-all))
+  #+end_src
+  
+* google translate
+  #+begin_src emacs-lisp
+    (require 'google-translate)
+    (require 'google-translate-smooth-ui)
+    (global-set-key "\C-ct" 'google-translate-smooth-translate)
+    (setq google-translate-translation-directions-alist
+	  '(("en" . "el") ("el" . "en") ("de" . "en") ("fr" . "en")))
+    (use-package google-translate
+      :ensure t
+      :custom
+      (google-translate-backend-method 'curl)
+      :config
+       (defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130)))
   #+end_src
